@@ -43,10 +43,7 @@ const updateContact = async (req, res) => {
   }
   const { error } = dataValidator(req.body);
   if (error) {
-    throw HttpError(
-      400,
-      `missing required ${error.details[0].context.key} field`
-    );
+    throw HttpError(400, error.message);
   }
   const { id } = req.params;
   const result = await contacts.updateContact(id, req.body);
