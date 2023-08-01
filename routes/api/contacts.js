@@ -6,6 +6,7 @@ const {
   isValidId,
   validateBody,
   bodyLengthCheck,
+  authenticate,
 } = require("../../middlewares");
 const { addSchema, updateFavoriteSchema } = require("../../models/contact");
 
@@ -18,16 +19,16 @@ const {
   updateStatusContact,
 } = require("../../controllers/contactControllers");
 
-router.get("/", getAll);
+router.get("/",authenticate, getAll);
 
-router.post("/", bodyLengthCheck, validateBody(addSchema), addContact);
+router.post("/",authenticate, bodyLengthCheck, validateBody(addSchema), addContact);
 
-router.get("/:id", isValidId, getById);
+router.get("/:id",authenticate, isValidId, getById);
 
-router.delete("/:id", isValidId, deleteContact);
+router.delete("/:id",authenticate, isValidId, deleteContact);
 
 router.put(
-  "/:id",
+  "/:id", authenticate,
   isValidId,
   bodyLengthCheck,
   validateBody(addSchema),
@@ -35,7 +36,7 @@ router.put(
 );
 
 router.patch(
-  "/:id/favorite",
+  "/:id/favorite", authenticate,
   isValidId,
   validateBody(updateFavoriteSchema),
   updateStatusContact,
