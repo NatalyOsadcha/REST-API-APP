@@ -8,7 +8,7 @@ const {
   bodyLengthCheck,
   authenticate,
 } = require("../../middlewares");
-const { addSchema, updateFavoriteSchema } = require("../../models/contact");
+const { addSchema, updateFavoriteSchema,  } = require("../../models/contact");
 
 const {
   getAll,
